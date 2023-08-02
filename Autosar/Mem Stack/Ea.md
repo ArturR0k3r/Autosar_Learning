@@ -1,0 +1,5 @@
+- Migration Algorithm
+- Internal/External
+- Reserved ; Layout ; Clipboard ; Permanent blocks
+- Migration Marker + Survival blocks
+- Limits (Size of Clipboard)

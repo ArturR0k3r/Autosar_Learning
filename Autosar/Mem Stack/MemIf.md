@@ -1,0 +1,3 @@
+- 32 bit linear addres to NvM
+- Device Index
+- How many devices
