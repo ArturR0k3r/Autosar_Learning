@@ -14,7 +14,7 @@ MICROSAR also includes a set of tools for configuring, integrating, and testing 
 
 MICROSAR is widely used in the automotive industry for developing embedded systems that meet the strict requirements of safety, reliability, and performance. It is also used in other industries, such as aerospace, industrial automation, and medical devices. The use of a standardized platform like MICROSAR can help reduce development time, improve quality, and increase the reuse of software components.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/73e7cdd0-48b8-45cc-9798-4d3e46b41af7/Untitled.png)
+![image](https://github.com/ArturR0k3r/Autosar_Learning/assets/117598386/a310bdd9-abe7-471e-844f-2726f9d317da)
 
 [What is AUTOSAR? | AUTOSAR Introduction | Why AUTOSAR?](https://autosartutorials.com/what-is-autosar/)
 
