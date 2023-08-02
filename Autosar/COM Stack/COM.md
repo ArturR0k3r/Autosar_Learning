@@ -8,7 +8,8 @@
 - Init values for signals
 - Fills in unused areaas in a frame with *CinTxIPduUnusedAreasDefault*
 - Filtering out the received signals values via filter algorithms
-	![[Pasted image 20230607104614.png]]
+	![Pasted image 20230607104614](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/5c5bc7f1-be9f-4941-bbf8-438dcfcff129)
+
 - Containing Routing Table for [[PDUR]]
 - Key factors for transmitting a frame are *ComTransferPropery*(TRIGGERED, TRIGGERED_WITHOUT_REPETION, TRIGGERED_ON_CHANGE, TRIGGERED_ON_CHANGE_WITHOUT_REPETITION, PENDING), *ComFilterAlgorithm*, *ComTxModeMode*(Direct,Periodic,Mixed,Non for PDU's), *TransmissionModeSelection*
 	1) TRIGGERED - Request for transmission is triggered immediately and requested for value present in *ComTxModeNumberOfRepetitions* times
@@ -26,11 +27,13 @@
 	If *ComFilterAlgorithm* in *ComFilter* container configured as ALWAYS then no need of TMS configuration for FALSE case
 	
 	Basically dependent on True/False mode we can configure how I-PDU's will be treated for transmission
-	![[Pasted image 20230607120515.png]]
+	![Pasted image 20230607120515](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/586e378a-5ee8-46ef-953e-ed309aedd8dd)
+
 	
-	![[Pasted image 20230607122451.png]]
+	![Pasted image 20230607122451](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/60bf4e67-9ee2-44ce-af6f-1d1df1a3e9fb)
+
 	
-	![[Pasted image 20230607122735.png]]
+	![Pasted image 20230607122735](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/bb86c75a-37ae-4a62-bde2-8b4e0e850ecf)
 - If invalid signal is received COM informs upper layer about this invalid receiption
 	If invalid value is received there are two types of action: Notify/Replace. Tag name : *ComDataInvalidAction*
 	Depending of configuration it can notify via *ComInvalidNotification* function or replace it with what configured in *ComSignalInitValue*
