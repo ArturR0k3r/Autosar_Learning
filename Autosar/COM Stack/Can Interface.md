@@ -11,4 +11,4 @@
 - Unpacking/Packing PDU's (L-PDU = L-SDU + DLC + ID)
 - Data transmission mode (local buffering/directly transmitting on bus)
 - Data flow (Normal/Triggered)
-![[Pasted image 20230606164237.png]]
+[![[Pasted image 20230606164237.png]]](https://github.com/ArturR0k3r/Autosar_Learning/blob/main/Autosar/images/Pasted%20image%2020230606164237.png)https://github.com/ArturR0k3r/Autosar_Learning/blob/main/Autosar/images/Pasted%20image%2020230606164237.png
