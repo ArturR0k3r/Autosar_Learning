@@ -1,4 +1,4 @@
-![Resistances](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/2a52adb1-d65e-4509-80dc-c8f38de28700)<h1>What is CAN?</h1>
+<h1>What is CAN?</h1>
 
 **CAN** stands for "Controller Area Network," and it is a communication protocol used in the automotive and industrial sectors to facilitate communication between various electronic devices within a vehicle or industrial system.
 
