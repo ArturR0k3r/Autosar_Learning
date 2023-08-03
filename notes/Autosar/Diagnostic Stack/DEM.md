@@ -1,0 +1,22 @@
+- Number of occurances
+- Snapshot + Freeze Frame + Extended
+- Storing events, Info (snapshots/ext/freeze) for [[DCM]], SID 19 for [[DCM]] 
+- Monitor - runnable in SWC runs periodically.
+- Filtering Faults
+- Event ID
+- DTC + status byte + Groups + Event combination (several events to one DTC's) + Severity(Information regarding importance of specific event) + Significance(fault/occurance)
+- Debouncing
+- Trigger condition
+- Aging
+- Diagnostic interface
+- NvM interaction
+- Events used by [[FIM]]
+- Errors in logic/autosar violations is detected by [[DET]]
+
+#### Configuration stuff
+- *DemTypeOfDTCSupported* to specify DTC byte
+- Function *Dem_GetDTCOfEvent* shall get DTC mapped to eventId in configuration
+- **Surpressed DTC**. Not visible for tester, but can be proceeded by monitor. Suppressed automatically if event is not aviable. DTC that suppressed is treated as non-configured.
+- Event can be marked as unaviable so it weren't need in removal of him from configuration,
+- Operationg cycles defining for cycle dependent status info. Restart/Switch to next operation cycle serves as trigger for calculation. Also used in funcs like aging, debouncing.
+- Dependent and normal op cycles.

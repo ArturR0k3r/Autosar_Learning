@@ -1,0 +1,8 @@
+- Addressing mechanism + Calculation
+	- 16 bit block number
+	- 16 bit block offset
+	- FeeVirtualPageSize
+- Fee_Read(Offset, Number) / Fee_Write(Number)
+- Fee_MainFunction
+- Callback
+- Immediate data handling

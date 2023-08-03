@@ -1,0 +1,4 @@
+Aspects of documentation:
+	1) Level of detail - Detailed design is basis for code implementation and unit testing, especially [[SW Unit Testing SWE.4]] requires a detailed description. In safety-critical SW ISO-26262 provides guidelines. In non-safety SW, typically at least C0 or statement coverage by some customers, C1 or branch coverage is required. The higher coverage can go, the more detail is required by the detailed design. Ex : if you have ASIL B classified module, C1 coverage is expected by ISO-26262
+	2) Interfaces - refer to SWE.2. It's also okay if interfaces are described on [[Architectual Design SWE.2]] step and tested on SWE.4 step
+	3) Timing of documentation - detailed design must be written BEFORE you start writing your code, so unit testing and overall concept of testing and designing will maintain their scope
