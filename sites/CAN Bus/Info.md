@@ -1,4 +1,4 @@
-<h1>What is CAN?</h1>
+![Resistances](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/2a52adb1-d65e-4509-80dc-c8f38de28700)<h1>What is CAN?</h1>
 
 **CAN** stands for "Controller Area Network," and it is a communication protocol used in the automotive and industrial sectors to facilitate communication between various electronic devices within a vehicle or industrial system.
 
@@ -16,37 +16,37 @@ The key features of CAN include:
 
 <h3>Physical Layer of CAN</h3>
 How nodes(ECU's connected to CAN BUS) look like:
-![[NodesOnCan.png]]
+![NodesOnCan](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/f8386d22-1b5a-4fbd-b9ef-a42d4f7310cf)
 
 Why we need tranceiver?
 Controller (MCU) understands only logical 1 (high) or 0 (low), while CAN BUS works on differential signaling principle, so in the middle we have logical unit called tranceiver. Basically what tranceiver does is, it's connecting to bus, gets current voltages, performs them into logical 1/0, transmits them to controller, same in otger way.
 
 Differential signaling principe:
 High speed:
-![[Diff signal.png]]
+![Diff signal](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/b6c4817b-7425-4d24-a639-6aaea4c3bf53)
 Low speed:
-![[Diff signal low.png]]
+![Diff signal low](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/7e8424d2-aec8-4441-b590-6a6e754529db)
 Why dominant? If on bus one ECU will transmit logical 1 and other will transmit logical 0, the state on bus will be 0 (dominant state), and 1 will be ommited.
 
 Why twisted pair is one of the cases of e2e protection:
-![[Twisted pair.png]]
+![Twisted pair](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/8d86043d-84b4-436c-8612-65069bd10f18)
 if some interference happen logical differential remains same and we still get same result no matter of interference
 
 Resistances on ends of can bus also used for e2e protection
-![[Resistances.png]]
+![Resistances](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/b67736cb-67dd-49b4-bfeb-ed5f5cd88918)
 It's used for protecting from отражённый сигнал, so voltages wont be repeated on bus
 
-![[Gateway.png]]
+![Gateway](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/6e7edb55-ce77-4881-8873-7a354887e000)
 Gateway is used to change msgs from high speed to low speed and vice versa
 
 <h3> Data Link Layer of CAN </h3>
 
 Message frame format:
-![[Message format.png]]
+![Message format](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/14d646a4-7072-4d44-8e1e-5bd5a94c6d74)
 Arbitration:
 To decide which node will transmit their message on bus one node sends SOF as 0 and everyone start arbitration by - sending their ID on bus
-![[arbitration1.png]]
-![[arbitration2.png]]
+![arbitration1](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/d6f71cfb-616e-44e3-aa7a-04c3e7df061d)
+![arbitration2](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/3a150024-8285-4446-abe0-c53cae457201)
 DLC - data length code - how much data is there going
 RTR - requert to receive data
 ID EXT - is there 11 bit id or 29 bit id
