@@ -16,7 +16,8 @@ The key features of CAN include:
 
 <h3>Physical Layer of CAN</h3>
 How nodes(ECU's connected to CAN BUS) look like:
-![NodesOnCan](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/f8386d22-1b5a-4fbd-b9ef-a42d4f7310cf)
+
+![NodesOnCan](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/5781da89-959a-4cfe-ac95-f0e5c0aaccbc)
 
 Why we need tranceiver?
 Controller (MCU) understands only logical 1 (high) or 0 (low), while CAN BUS works on differential signaling principle, so in the middle we have logical unit called tranceiver. Basically what tranceiver does is, it's connecting to bus, gets current voltages, performs them into logical 1/0, transmits them to controller, same in otger way.
