@@ -12,5 +12,4 @@ Within this protocol specification, it is assumed that the data communication be
 Security considerations for the communication channel are also not in the scope. It is assumed that any security protocol such as MACsec, IPsec or TLS could be used, since the V2xRAL is located on top of these layers.
 Due to the minimum set of data it can be exchanged within a raw Ethernet frame, but can also be placed on top of a protocol such as TCP/IP
 The protocol does not require any acknowledgement or segmentation
-![[Pasted image 20230616104102.png]]
-![[Pasted image 20230616104236.png]]
+
