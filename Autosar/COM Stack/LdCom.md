@@ -1,7 +1,0 @@
-**LDCOM** enables communication of large data efficiently. LDCOM does not contain the vast majority of the features that COM contains (timeout monitoring, Rx / Tx filtering, signal invalidation, etc), instead it focuses itself on long data transmission from SOME / IP.
-
-1. Fragmentation: The original large PDU is divided into smaller fragments (or blocks) that can be transmitted over the network. The fragment size is determined by network constraints and factors such as the maximum PDU size supported by the protocol and physical layer.
-2. Packaging of Fragments: The PDU fragments are packed into LdCom messages for transmission over the network. Each fragment is typically accompanied by metadata, such as the PDU identifier, fragment number, and total fragment count.
-3. Sending Fragments: LdCom messages containing PDU fragments are sent through the vehicle network to the target node.
-4. Reception and Reassembly of Fragments: At the receiving side, LdCom messages are decoded, and PDU fragments are extracted. The fragments are reassembled into the original large PDU using information about the fragment number and total fragment count.
-5. Processing of the Large PDU: Once the original PDU is reassembled, it can be passed to higher-layer modules or entities for further processing.

@@ -1,8 +1,0 @@
-- Used by [[ComM]] to get status of communication
-- CanSM used to modify the communication modes of the CAN network.
-- Works in between with [[ComM]] and [[Can Interface]].
-- Four states: Normal/Standby/Sleep/Stop
-- BusOff recovery algorithm for each used CAN Controller
-- Change of bus state can be done by triggers
-- Contains effects: some actions that invokes API with set of predefined values
-- Bus off recovery counter & Timing values for Long Recovery Time, Short recovery time & time period between them
