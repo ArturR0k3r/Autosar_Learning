@@ -1,54 +1,45 @@
-<h1>What is CAN?</h1>
+<h1>What is E2E in general and as library</h1>
+SW mechanismы to ensure data integrity in case of occuring error in data transmission.
 
-**CAN** stands for "Controller Area Network," and it is a communication protocol used in the automotive and industrial sectors to facilitate communication between various electronic devices within a vehicle or industrial system.
+## The common communication errors
 
-CAN allows multiple electronic control units (ECUs) or nodes to communicate with each other over a single twisted-pair bus, using a differential signaling method to reduce electromagnetic interference. This protocol has become the standard in modern vehicles for interconnecting ECUs responsible for various tasks, such as engine control, transmission control, braking, airbags, infotainment systems, and more.
+1) **Data Loss** 
+2) **Repetition** - same data information is received in successive messages
+3) **Timeout** - can only occure in systems with defined timing requirements (which means sender and receiver has common understanding of "time")
+4) **Incorrect Sequence** - happens in highly distributed systems. Data arrives at receiver in another sequence than originally sent. (ex. firstly comes CF and not the FF). This can happen in case of buffered communication
+5) **Insertion of an unintended message** - additional msg or part of it is added in stream. Occurs very unlikely and protected via hardware perspective
+6) **Data Corruption**
+7) **Addressing Error** - Data sent to wrong destination and treated as correct data. Usually protected by a unique ID to data or to sender/receiver
+8) **Constant "over-" Transmission** - different or the same message are transmitted over and over again, leading to a bus overload and detaining other safety-relevant data.
+9) **Masquerading Error** - unique DataID exist, but data disgues itself and accepted although it just pretends to be the one correct. Can happen in case of corruption of DataID.
 
-The key features of CAN include:
 
-1. Multi-master communication: CAN allows multiple nodes to transmit and receive data simultaneously, creating a decentralized and flexible communication system. All nodes listens all info on bus and at the same time transmits info.
+## The communication error detection mechanisms
 
-2. Message-based communication: Data on the CAN bus is transmitted in the form of messages, each containing an identifier and payload. This structure allows for efficient and reliable data exchange.
+- **Hardware Redundancy**
+- **Time Redundancy** - same information is transmitted twice via two different messages in different time slots
+- **Checksum** - Just algorithm itself // Дата просто дошла тому кому нужно
+- **Sequence Counter**
+- **Message-ID**
+- **CRC** - Whole data block is used as base for calculation for generator to create a memory-dependent signature that is recalculated at receiver side. // Дата дошла не просто только тому кому нужно, но и ещё всё что в дате должно быть таким же как я и отправил
+- **Parity bit**
+- **EDC(Error Detection Codes) / ECC(Error Correction Codes)** - There exist several different algorithms for such codes that can be described by their Hamming Distance. The Hamming Distance describes how many bit failures of the code can be detected. A Hamming code with distance d can correct d-1 errors.
+- **Timestamps**
+- **Cryptographic techniques**
+- **Information Redundancy** - same info twice in one msg
+- **Identification procedure** - ex. seed-key
+- **Retry mechanisms**
+- **ACK**
 
-3. Deterministic communication: CAN is designed to be predictable and deterministic, meaning that messages are prioritized, and the system can guarantee a specific response time for critical messages.
 
-4. Error detection and fault tolerance: CAN employs robust error-checking mechanisms, such as cyclic redundancy checks (CRC), to detect errors in transmitted data. It also has the ability to automatically recover from errors.
+Safety-mechanisms in E2E had to meet ASIL-C requirements considering ISO-26262 standart.
 
-<h3>Physical Layer of CAN</h3>
-How nodes(ECU's connected to CAN BUS) look like:
+E2E library is where the algorithms for E2E protection are implemented. It provides mechanisms up to ASIL-D level. Profiles as well as state machine of E2E are configurable.
 
-![NodesOnCan](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/5781da89-959a-4cfe-ac95-f0e5c0aaccbc)
+!!! E2E helps in detection of errors, but not their handling !!!
 
-Why we need tranceiver?
-Controller (MCU) understands only logical 1 (high) or 0 (low), while CAN BUS works on differential signaling principle, so in the middle we have logical unit called tranceiver. Basically what tranceiver does is, it's connecting to bus, gets current voltages, performs them into logical 1/0, transmits them to controller, same in otger way.
-
-Differential signaling principe:
-High speed:
-![Diff signal](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/b6c4817b-7425-4d24-a639-6aaea4c3bf53)
-Low speed:
-![Diff signal low](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/7e8424d2-aec8-4441-b590-6a6e754529db)
-Why dominant? If on bus one ECU will transmit logical 1 and other will transmit logical 0, the state on bus will be 0 (dominant state), and 1 will be ommited.
-
-Why twisted pair is one of the cases of e2e protection:
-![Twisted pair](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/8d86043d-84b4-436c-8612-65069bd10f18)
-if some interference happen logical differential remains same and we still get same result no matter of interference
-
-Resistances on ends of can bus also used for e2e protection
-![Resistances](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/b67736cb-67dd-49b4-bfeb-ed5f5cd88918)
-It's used for protecting from отражённый сигнал, so voltages wont be repeated on bus
-
-![Gateway](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/6e7edb55-ce77-4881-8873-7a354887e000)
-Gateway is used to change msgs from high speed to low speed and vice versa
-
-<h3> Data Link Layer of CAN </h3>
-
-Message frame format:
-![Message format](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/14d646a4-7072-4d44-8e1e-5bd5a94c6d74)
-Arbitration:
-To decide which node will transmit their message on bus one node sends SOF as 0 and everyone start arbitration by - sending their ID on bus
-![arbitration1](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/d6f71cfb-616e-44e3-aa7a-04c3e7df061d)
-![arbitration2](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/3a150024-8285-4446-abe0-c53cae457201)
-DLC - data length code - how much data is there going
-RTR - requert to receive data
-ID EXT - is there 11 bit id or 29 bit id
-There's different type of frames, but you can google them like overloading frame, error frame etc
+#### Steps to use E2E Library
+1) Select architectual approach to use E2E library
+2) Select data elements to be protected and with wich E2E profile
+3) Determine settings for each data element or signal roup to be protected
+4) Developing necessary code for invocation of E2E library functions
