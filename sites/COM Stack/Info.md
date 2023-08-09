@@ -1,4 +1,6 @@
 <h1>What is СOM stack?</h1>
+
+![Pasted image 20230808133417](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/cc4d0966-c128-4159-9626-b1e8d8986a3f)
   
 In AUTOSAR (AUTomotive Open System ARchitecture), the term "Com Stack" refers to the Communication Stack, which is a set of software modules responsible for handling the communication between different Electronic Control Units (ECUs) in a vehicle's distributed automotive system. The Communication Stack provides the necessary protocols, interfaces, and services for data exchange between ECUs in a consistent and standardized manner.
 
@@ -15,8 +17,9 @@ The Communication Stack consists of several layers, each serving a specific purp
 5. **Network Layer (NL):** The Network Layer is responsible for routing messages within the network and handling message addressing. It manages the addressing and prioritization of messages to ensure efficient data exchange.
 
 6. **LIN Transport Protocol (LINTP) / FlexRay Transport Protocol (FRTP):** These are specific transport layer protocols used for LIN and FlexRay communication buses, respectively.
-![[Pasted image 20230808133417.png]]
-![[Pasted image 20230808133357.png]]
+
+![Pasted image 20230808133357](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/9c7b49c5-31da-4b92-8d87-2e38628a7048)
+
 <h2>Beware! For more specific information, watch videos and read either docs from official site either from sources provided in corresponding file</h2>
 <h4>Can Drv</h4>
 A CAN (Controller Area Network) driver in AUTOSAR is a software component that facilitates communication between applications within an automotive system through the CAN bus. CAN is a standard protocol for data exchange in automotive networks, enabling various devices and subsystems to exchange information such as sensor signals, control commands, and other data.
