@@ -1,54 +1,29 @@
-<h1>What is CAN?</h1>
+<h1>What is Diagnostic Stack</h1>
+![[Pasted image 20230809110515.png]]
+Vehicle diagnostics is all about checking the health of your vehicle using some protocols. Protocols are either on board vehicle diagnostics (OBD) protocol or off board protocols (UDS). Using these protocols information from different systems or sensors can be read or error reported by ECUs can be read and error related data can be read and many more things can be done using diagnostics
+**NvM is part of memory stack**. **Here NvM is required to store event related data when event fails.** i.e. to store **freeze frame** data and extended data. Blocks are created in NvM to store diagnostic event related data
 
-**CAN** stands for "Controller Area Network," and it is a communication protocol used in the automotive and industrial sectors to facilitate communication between various electronic devices within a vehicle or industrial system.
+<h2>Beware! For more specific information, watch videos and read either docs from official site either from sources provided in corresponding file</h2>
+### Diagnostic Event Manager (DEM)
 
-CAN allows multiple electronic control units (ECUs) or nodes to communicate with each other over a single twisted-pair bus, using a differential signaling method to reduce electromagnetic interference. This protocol has become the standard in modern vehicles for interconnecting ECUs responsible for various tasks, such as engine control, transmission control, braking, airbags, infotainment systems, and more.
+DEM is present at system service layer in AUTOSAR architecture module. DEM module is responsible for processing diagnostic events and storing event and event related data to NvM. Also DEM provides diagnostics information to DCM module i.e. DTC status or snapshot data (freeze-frame). 
+  
+DEM modules defines DTCs (Diagnostics Trouble Codes). DTCs are associated to events (e.g. event of sensor fault) and SWC (Monitor function which monitors sensor state) or BSW modules (Monitor function of BSW module which monitors state of BSW modules) can report event status (Passed or Failed) to DEM module i.e. in case if event fails **DEM module will set DTC status bytes as per ISO-14229** **and request /NvM to store Event and event related data to NvM
+### Diagnostic Communication Manager (DCM)
 
-The key features of CAN include:
+DCM is present at Communication Service layer in AUTOSAR architecture module. DCM is part of diagnostic stack. DCM is responsible for communication between external testing tool **(used for requesting diagnostic data from ECU using services provided by ISO 14229)**. Data may be DTC status or to read DID values. 
 
-1. Multi-master communication: CAN allows multiple nodes to transmit and receive data simultaneously, creating a decentralized and flexible communication system. All nodes listens all info on bus and at the same time transmits info.
+**DCM module accepts incoming request service from tester tool validates service and take proper action related to service** (it may communicate to DEM for reading DTC related info) and send **Positive response** or **Negative Response Code (NRCs)** based on validation of incoming request and processing of request.
 
-2. Message-based communication: Data on the CAN bus is transmitted in the form of messages, each containing an identifier and payload. This structure allows for efficient and reliable data exchange.
+Format of request and response is defined in ISO 14229.
+### Development Error Tracer (DET)
 
-3. Deterministic communication: CAN is designed to be predictable and deterministic, meaning that messages are prioritized, and the system can guarantee a specific response time for critical messages.
+DET is module is used at time of development. While Development DET module is enabled and for final release DET should be disabled. **DET module provides APIs to report an error.** **When DET module is enabled, different checks are added to functions of different BSW modules to capture an error**. **Error are API function is called with wrong argument, API function is called with NULL Pointer etc. Each error has an error number** and each module has a module number.  
+  
+More information about DET error code for each BSW module is defined in respective SWS document provided by Autosar.  
+  
+### Function Inhibition Monitor (FIM)
 
-4. Error detection and fault tolerance: CAN employs robust error-checking mechanisms, such as cyclic redundancy checks (CRC), to detect errors in transmitted data. It also has the ability to automatically recover from errors.
-
-<h3>Physical Layer of CAN</h3>
-How nodes(ECU's connected to CAN BUS) look like:
-
-![NodesOnCan](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/5781da89-959a-4cfe-ac95-f0e5c0aaccbc)
-
-Why we need tranceiver?
-Controller (MCU) understands only logical 1 (high) or 0 (low), while CAN BUS works on differential signaling principle, so in the middle we have logical unit called tranceiver. Basically what tranceiver does is, it's connecting to bus, gets current voltages, performs them into logical 1/0, transmits them to controller, same in otger way.
-
-Differential signaling principe:
-High speed:
-![Diff signal](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/b6c4817b-7425-4d24-a639-6aaea4c3bf53)
-Low speed:
-![Diff signal low](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/7e8424d2-aec8-4441-b590-6a6e754529db)
-Why dominant? If on bus one ECU will transmit logical 1 and other will transmit logical 0, the state on bus will be 0 (dominant state), and 1 will be ommited.
-
-Why twisted pair is one of the cases of e2e protection:
-![Twisted pair](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/8d86043d-84b4-436c-8612-65069bd10f18)
-if some interference happen logical differential remains same and we still get same result no matter of interference
-
-Resistances on ends of can bus also used for e2e protection
-![Resistances](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/b67736cb-67dd-49b4-bfeb-ed5f5cd88918)
-It's used for protecting from отражённый сигнал, so voltages wont be repeated on bus
-
-![Gateway](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/6e7edb55-ce77-4881-8873-7a354887e000)
-Gateway is used to change msgs from high speed to low speed and vice versa
-
-<h3> Data Link Layer of CAN </h3>
-
-Message frame format:
-![Message format](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/14d646a4-7072-4d44-8e1e-5bd5a94c6d74)
-Arbitration:
-To decide which node will transmit their message on bus one node sends SOF as 0 and everyone start arbitration by - sending their ID on bus
-![arbitration1](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/d6f71cfb-616e-44e3-aa7a-04c3e7df061d)
-![arbitration2](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/3a150024-8285-4446-abe0-c53cae457201)
-DLC - data length code - how much data is there going
-RTR - requert to receive data
-ID EXT - is there 11 bit id or 29 bit id
-There's different type of frames, but you can google them like overloading frame, error frame etc
+FIM module responsible for inhibition of particular functionality of software components based on event status. FIM used FID (Function Identifier). FID represents functionality with inhibition condition. There is an inhibition condition and if particular inhibition condition is satisfied respective functionality will be stopped from execution. FID is assigned to SWC.  
+  
+ An event is assigned to FID. Based on event status FID's status is derived and which will decide whether to execute functionality or not.
