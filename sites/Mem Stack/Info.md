@@ -1,5 +1,7 @@
 <h1>What is Memory Stack</h1>
-![[Pasted image 20230809111624.png]]
+
+![Pasted image 20230809111624](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/c9fce6ac-80b6-43a1-8256-1395888e6bc6)
+
 To manage Non Volatile (NV) memory in automotive domain  Memory Stack (MemStack) is used in AUTOSAR environment. MemStack in AUTOSAR deals with :  
 
  **1. Storage of data in non NV memory, in structured manner.**  
