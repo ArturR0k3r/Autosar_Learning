@@ -1,9 +1,13 @@
 <h1>What is Diagnostic Stack</h1>
-![[Pasted image 20230809110515.png]]
+
+![Pasted image 20230809110515](https://github.com/LivingLegendLL/Autosar_Learning/assets/125698571/924ce04c-a0e1-496d-82c1-0f8af7dfb2e1)
+
+
 Vehicle diagnostics is all about checking the health of your vehicle using some protocols. Protocols are either on board vehicle diagnostics (OBD) protocol or off board protocols (UDS). Using these protocols information from different systems or sensors can be read or error reported by ECUs can be read and error related data can be read and many more things can be done using diagnostics
 **NvM is part of memory stack**. **Here NvM is required to store event related data when event fails.** i.e. to store **freeze frame** data and extended data. Blocks are created in NvM to store diagnostic event related data
 
 <h2>Beware! For more specific information, watch videos and read either docs from official site either from sources provided in corresponding file</h2>
+
 ### Diagnostic Event Manager (DEM)
 
 DEM is present at system service layer in AUTOSAR architecture module. DEM module is responsible for processing diagnostic events and storing event and event related data to NvM. Also DEM provides diagnostics information to DCM module i.e. DTC status or snapshot data (freeze-frame). 
