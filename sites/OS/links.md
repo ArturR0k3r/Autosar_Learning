@@ -1,5 +1,3 @@
-https://www.youtube.com/watch?v=osULWSJ2fmY&t=1088s&pp=ygUV0YfRgtC-INGC0LDQutC-0LUgY2Fu
+https://cdn.vector.com/cms/content/know-how/_technical-articles/AUTOSAR/AUTOSAR_Task_Scheduling_VU_201507_PressArticle_EN.pdf
 
-https://www.youtube.com/watch?v=FqLDpHsxvf8&t=363s
-
-https://www.youtube.com/watch?v=YBrU_eZM110
+https://www.youtube.com/watch?v=MMYzGGrfCqM&ab_channel=Learn-AUTOSAR-basics
